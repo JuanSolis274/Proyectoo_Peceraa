@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clientes_collection', function (Blueprint $table) {
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamps(); // created_at y updated_at
+            $table->string('nombre');
+            $table->string('correo')->unique();
+            $table->string('contraseña');
+            $table->string('rol')->default('normal'); // Campo para rol, con valor por defecto 'normal'
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('usuarios');
     }
 };

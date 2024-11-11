@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class Clientes extends Model
+class PH extends Model
 {
     use HasFactory;
     protected $connection = 'mongodb';
-    protected $collection = 'clientes_collection';
 }

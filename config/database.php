@@ -92,12 +92,12 @@ return [
         ],
             //ip 189.145.83.240
             //Username= JuanSolis, Password= Vegetta777
-            //Conexión Exitosa!!!!!asd
+            //Conexión Exitosa!!!!!
 
         'mongodb' => [
             'driver' => 'mongodb',
             'dsn' => env('DB_URI'),
-            'database' => env('DB_DATABASE', 'Libreria')
+            'database' => env('DB_DATABASE', 'Pecera')
         ],
 
     ],
