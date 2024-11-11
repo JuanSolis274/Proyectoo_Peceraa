@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nivel_de__aguas', function (Blueprint $table) {
+        Schema::create('nivel_de_aguas', function (Blueprint $table) {
             $table->id();
         $table->decimal('nivel_agua', 5, 2); // Nivel del agua en la unidad de medida deseada, con hasta 2 decimales para precisión
         $table->timestamp('hora_medicion')->useCurrent(); // Hora de la medición con valor actual por defecto

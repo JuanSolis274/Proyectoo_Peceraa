@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nombre_sensor'); // Nombre del sensor, por ejemplo, "Sensor de PH"
             $table->string('unidad_medida'); // Unidad de medida, por ejemplo, "pH", "ppm", "°C"
             $table->decimal('lectura', 8, 2)->nullable(); // Valor de la lectura, con dos decimales
-            $table->date('fecha_instalacion'); // Fecha de instalación del sensor
+            $table->date('fecha_instalacion'); // Fecha de instalación de los sensores
         });
     }
 

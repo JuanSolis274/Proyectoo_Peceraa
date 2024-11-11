@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('monoxido_de__carbonos', function (Blueprint $table) {
+        Schema::create('monoxido_de_carbonos', function (Blueprint $table) {
             $table->id();
             $table->decimal('nivel_co', 5, 2); // Campo para el nivel de CO con hasta 2 decimales
             $table->timestamp('hora_medicion')->useCurrent(); // Hora de la medición con valor actual por defecto
