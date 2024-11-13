@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class PH extends Model
+class Monoxido_de_Carbono extends Model
 {
     use HasFactory;
     protected $connection = 'mongodb';
