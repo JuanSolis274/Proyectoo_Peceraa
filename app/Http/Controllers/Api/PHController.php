@@ -28,7 +28,7 @@ class PHController extends Controller
         $ph->save();
     
         return response()-> json(['result'=>$ph], Response::HTTP_CREATED);
-    } */
+    }*/
 
 
 }

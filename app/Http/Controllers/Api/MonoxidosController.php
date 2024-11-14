@@ -22,13 +22,13 @@ class MonoxidosController extends Controller
     //GUARDAR
         //SOLO PARA PRUEBAS
 
-    public function store (Request $request){
+    /*public function store (Request $request){
         $monoxido_de_carbono = new Monoxido_de_Carbono();
 
         $monoxido_de_carbono -> nivel_co = $request -> nivel_co;
 
         $monoxido_de_carbono -> save();
 
-        $monoxido_de_carbono -> json (['result'=>$monoxido_de_carbono], Response::HTTP_CREATED);
-    }
+        return response() -> json (['result'=>$monoxido_de_carbono], Response::HTTP_CREATED);
+    }*/
 }
