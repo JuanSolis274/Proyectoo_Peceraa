@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Turbidez;
+use App\Models\Turbidez as ModelsTurbidez;
 use Symfony\Component\HttpFoundation\Response;
 
 class TurbidezController extends Controller
@@ -12,21 +13,21 @@ class TurbidezController extends Controller
     //MOSTRAR
     public function index(){
 
-        $turbidez = Turbidez::all();
+        $turbidez = ModelsTurbidez::all();
 
         return response()->json ([
-            "result" => $temperatura
+            "result" => $turbidez
         ], Response::HTTP_OK);
     }
 
     //GUARDAR
     /*public function store(Request $request){
-        $temperatura = new Temperatura();
+        $turbidez = new ModelsTurbidez();
 
-        $temperatura -> temperatura = $request -> temperatura;
+        $turbidez -> nivel_de_turbidez = $request -> nivel_de_turbidez;
 
-        $temperatura -> save();
+        $turbidez -> save();
 
-        return response() -> json (['result'=>$temperatura], Response::HTTP_CREATED);
+        return response() -> json (['result'=>$turbidez], Response::HTTP_CREATED);
     }*/
 }

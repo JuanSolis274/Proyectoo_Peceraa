@@ -59,7 +59,7 @@ Route::controller(TurbidezController::class)->group(function(){
     Route::get('/turbidez_mostrar', 'index');
 
     //SOLO PRUEBAS
-    Route::post('turbidez', 'store');
+    //Route::post('turbidez', 'store');
 });
 
 //NIVEL DE AGUA
@@ -67,5 +67,5 @@ Route::controller(Nivel_de_AguaController::class)->group(function(){
     Route::get('/nivel_de_agua_mostar','index');
 
     //SOLO PRUEBAS
-    Route::post('nivel_de_agua', 'store');
+    //Route::post('nivel_de_agua', 'store');
 });
