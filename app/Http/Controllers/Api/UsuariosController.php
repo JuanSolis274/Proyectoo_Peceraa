@@ -4,50 +4,68 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Usuarios;
-use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
-    //Mostrar
-    public function index() {
-        $usuario = Usuarios::all();
+    /**
+     * Obtener todos los usuarios de una pecera específica.
+     *
+     * @param string $pecera_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index($pecera_id)
+    {
+        $pecera = Usuarios::find($pecera_id);
 
-        return response()->json([
-            "result" => $usuario
-        ], Response::HTTP_OK);
+        if (!$pecera) {
+            return response()->json(['message' => 'Pecera no encontrada'], 404);
+        }
+
+        return response()->json($pecera->getUsuarios());
     }
-    //Guardar
-    public function store(Request $request) {
-        $usuario = new Usuarios();
 
-        $usuario -> nombre = $request -> nombre;
-        $usuario -> correo = $request -> correo;
-        $usuario -> contraseña = $request -> contraseña;
+    /**
+     * Agregar un nuevo usuario a una pecera.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param string $pecera_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request, $pecera_id)
+{
+    $pecera = Usuarios::find($pecera_id);
 
-        $usuario->save();
-
-        return response()-> json(['result'=>$usuario], Response::HTTP_CREATED);
-    } 
-    //Actualizar
-    public function update(Request $request, $id) {
-       $usuario = Usuarios::findOrFail($request->id);
-
-       $usuario -> nombre = $request -> nombre;
-       $usuario -> correo = $request -> correo;
-       $usuario -> contraseña = $request -> contraseña;
-
-       $usuario->save();
-
-       return response()-> json(['result'=>$usuario], Response::HTTP_OK);
-
+    if (!$pecera) {
+        return response()->json(['message' => 'Pecera no encontrada'], 404);
     }
-    //Eliminar
-    public function destroy($id) {
-        Usuarios::destroy($id);
 
-        return response()-> json(['message'=> "Deleted"], Response::HTTP_OK);
+    // Validación de los datos del usuario
+    $validated = $request->validate([
+        'nombre' => 'required|string|max:255',
+        'email' => 'required|email',
+        'contraseña' => 'required|string|min:8',
+    ]);
+
+    // Verificar si el email ya existe dentro del documento de la pecera
+    if (collect($pecera->usuarios)->pluck('email')->contains($validated['email'])) {
+        return response()->json(['message' => 'El email ya está registrado para esta pecera'], 422);
     }
+
+    // Crear el nuevo usuario con la fecha de creación
+    $usuario = [
+        'nombre' => $validated['nombre'],
+        'email' => $validated['email'],
+        'contraseña' => Hash::make($validated['contraseña']),
+        'fecha_creacion' => now()->toDateTimeString(),  // Agregar la fecha de creación
+    ];
+
+    // Agregar el usuario al campo 'usuarios'
+    $pecera->push('usuarios', $usuario);
+    $pecera->save();
+
+    return response()->json(['message' => 'Usuario agregado correctamente', 'usuario' => $usuario]);
+}
+
 }

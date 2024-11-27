@@ -2,24 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Hash;
-//use Illuminate\Database\Eloquent\Model;
-
 use Jenssegers\Mongodb\Eloquent\Model;
 
 class Usuarios extends Model
 {
-    use HasFactory;
-    protected $connection = 'mongodb';
+    protected $connection = 'mongodb'; // Conexión MongoDB
+    protected $collection = 'Pecera';  // Colección Pecera
 
-    protected $attributes = [
-        'rol' => 'normal', // Valor predeterminado para el campo rol
+    protected $fillable = [
+        'nombre_pecera',
+        'usuarios',
+        'sensores'
     ];
 
-    // Método para hashear la contraseña automáticamente
-    public function setContraseñaAttribute($value)
+    // Método para obtener el arreglo de usuarios
+    public function getUsuarios()
     {
-        $this->attributes['contraseña'] = Hash::make($value);
+        return $this->attributes['usuarios'] ?? [];
     }
 }

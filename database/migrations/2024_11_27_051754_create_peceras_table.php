@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('usuarios', function (Blueprint $table) {
+        Schema::create('peceras', function (Blueprint $table) {
             $table->id();
-            $table->timestamps(); // created_at y updated_at
-            $table->string('nombre');
-            $table->string('correo')->unique();
-            $table->string('contraseña');
-            $table->string('rol')->default('normal'); // Campo para rol, con valor por defecto 'normal'
+            $table->timestamps();
         });
     }
 
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('peceras');
     }
 };

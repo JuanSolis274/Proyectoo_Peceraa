@@ -97,7 +97,7 @@ return [
         'mongodb' => [
             'driver' => 'mongodb',
             'dsn' => env('DB_URI'),
-            'database' => env('DB_DATABASE', 'Pecera')
+            'database' => env('DB_DATABASE', 'PeceraBD')
         ],
 
     ],

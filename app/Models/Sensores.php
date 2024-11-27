@@ -2,13 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-//use Illuminate\Database\Eloquent\Model;
-
 use Jenssegers\Mongodb\Eloquent\Model;
 
 class Sensores extends Model
 {
-    use HasFactory;
-    protected $connection = 'mongodb';
+    protected $connection = 'mongodb'; // Conexión MongoDB
+    protected $collection = 'Pecera';  // Colección Pecera
+
+    protected $fillable = [
+        'nombre_pecera', 
+        'usuarios', 
+        'sensores'
+    ];
+
+    // Método para obtener el arreglo de sensores
+    public function getSensores()
+    {
+        return $this->attributes['sensores'] ?? [];
+    }
 }
